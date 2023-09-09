@@ -1,22 +1,29 @@
+# from selenium import webdriver
+# from selenium.webdriver import Chrome
+# from selenium.webdriver.common.by import By
+# from selenium.webdriver.common.keys import Keys
+# from selenium.webdriver.support.ui import WebDriverWait
+# from selenium.webdriver.support import expected_conditions as EC
+
 from khan.khan import Khan
+
 with Khan() as bot:
-    # bot.land_homepage()
-    # # bot.get_boxes()
     bot.land_homepage()
-    cards = bot.get_boxes()
-    a_tags = bot.get_links(cards)
-    href_tags= bot.get_content(a_tags)
-    bot.scrape_links(href_tags)
+    units= bot.get_units()
+    units.pop()
+    print('unit Links scraped')
+    units=units[5:]
+    print(len(units))
 
-    # bot.land_video_page()
-    # bot.get_video_link()  #<-- DONE
-    # bot.get_about()
-    # bot.get_subtitles()
+    bot.scrape_units(units,'check.json')
 
-    # bot.get_text_transcript()
-    # bot.get_discussion_posts()
-    bot.dump_to_json() 
-    # bot.dump_to_csv()
-    # cards = bot.get_boxes()
-    # links = bot.get_links(cards)
-    # bot.get_content(links)
+    print("dumping files")
+    bot.dump_video_links(6)
+    bot.dump_to_json(6)
+
+
+
+
+
+
+
